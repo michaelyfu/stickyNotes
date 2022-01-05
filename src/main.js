@@ -1,31 +1,54 @@
 const notesContainer = document.getElementById("notes");
-const addNoteButton = notesContainer.querySelector(".add-note");
+//to switch event listener from dbclick to right click, look into oncontextmenu
+notesContainer.addEventListener("click", () => newNote());
 
-addNoteButton.addEventListener("click", () => newNote(1, "hi"));
+// getNotes().forEach((note) => {
+//     console.log(note);
+//   });
 
 function getNotes() {
-    return JSON.parse(localStorage.getItem("allNotes"));
+    return JSON.parse(localStorage.getItem("allNotes") || "[]");
 }
 
 function saveNotes(notes) {
-    localStorage.setItem("allNotes", JSON.stringify(notes)) //JSON.stringify(notes)
+    localStorage.setItem("allNotes", JSON.stringify(notes)) 
 }
 
-function newNote(id, content) {
-    const add = document.createElement("textarea");
-    const node = document.createTextNode(content);
-    add.append(node);
+function newNote() {
+    const allNotes = getNotes();
+
+    const emptyNote = {
+        id: 10000,
+        content: ""
+    };
+
+    const note = document.createElement("textarea");
+    note.classList.add("note");
+    note.id = emptyNote.id;
+    note.content = emptyNote.content;
+
     const element = document.getElementById("notes");
-    element.append(add);
-}
+    element.append(note);
 
-function updateNote(id, content) {
-    const newElement = document.createElement("textarea");
-    newElement.addEventListener("change", () => {
-        updateNote(id, newElement.value);
+    allNotes.push(note);
+    saveNotes(allNotes);
+
+    note.addEventListener("change", () => {
+        updateNote(note.id, note.content);
     });
 }
 
+function updateNote(id, updateContent) {
+
+    const allNotes = getNotes();
+    const updatingNote = allNotes.filter((note) => note.id == id)[0];
+    updatingNote.content = "apples";
+    saveNotes(allNotes);
+}
+
 function deleteNote() {
-    
+    const notes = getNotes().filter((note) => note.id != id);
+
+    saveNotes(notes);
+    notesContainer.removeChild(element);
 }
