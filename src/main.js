@@ -1,6 +1,8 @@
 const notesContainer = document.getElementById("notes");
 const addNoteButton = notesContainer.querySelector(".add-note");
 
+addNoteButton.addEventListener("click", () => newNote(1, "hi"));
+
 function getNotes() {
     return JSON.parse(localStorage.getItem("allNotes"));
 }
@@ -17,10 +19,13 @@ function newNote(id, content) {
     element.append(add);
 }
 
-function updateNote() {
-
+function updateNote(id, content) {
+    const newElement = document.createElement("textarea");
+    newElement.addEventListener("change", () => {
+        updateNote(id, newElement.value);
+    });
 }
 
 function deleteNote() {
-
+    
 }
