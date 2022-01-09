@@ -1,11 +1,23 @@
 body {
-    background-color: powderblue;
+  height: 100vh;
+  width: 100vw;
+  /* background-color: #F78888; */
+  /* background-image: linear-gradient(90deg, #F3D250 33.33%, #90CCF4 33.33%, #90CCF4 66.66%, #F78888 66.66%); */
+  background-image: url(nature.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 0px;
   }
 
-/* #notes {
-width: 1000px;
-height: 1000px;
-background: red;
+.note {
+width: 100px;
+height: 100px;
+background: #ECECEC;
 margin: 0px;
 padding: 0px;
-} */
+font-family: Garamond, serif;
+font-size: x-large;
+font-weight: bold;
+text-align: center;
+color: black; /* text color */
+}

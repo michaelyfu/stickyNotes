@@ -19,10 +19,12 @@ function getNotes() {
     localStorage.setItem("localStorageNotes", JSON.stringify(notes));
   }
 
-function updateNote(id, updateContent) {
+function updateNote(id, updateContent, x, y) {
     const allNotes = getNotes();
     const updatingNote = allNotes.filter((note) => note.id == id)[0];
     updatingNote.content = updateContent;
+    updatingNote.x = x;
+    updatingNote. y = y;
     saveNotes(allNotes);
 }
 
@@ -101,19 +103,24 @@ function create(id, content, x, y) {
     // i.y = event.clientY;
 
     i.addEventListener("change", () => {
-        updateNote(i.id, i.value);
+        updateNote(i.id, i.value, i.x, i.y);
     });
 
-    i.addEventListener("click", () => {
-        deleteNote(i.id, i);
+    i.addEventListener("contextmenu", (e) => {
+        // if(e.key == 3) {
+            e.preventDefault();
+            deleteNote(i.id, i);
+        
     });
-
     
-    //Add it to the body of the document
-    // notesContainer.appendChild(i);
+    // starting drag and drop functionality
+    // i.addEventListener("ondrag", () => {
+    //     console.log('hello');
+    //     updateNote(i.id, i.value, event.clientX, event.clientY);
+    // });
 
     return i;
   }
   //Main event listener for clicks
-  document.addEventListener('keypress', addNote);
+  document.addEventListener('dblclick', addNote);
 
