@@ -1,4 +1,4 @@
-This project took code and structure of JS file from https://www.youtube.com/watch?v=Efo7nIUF2JY.
+This project first began from watching https://www.youtube.com/watch?v=Efo7nIUF2JY.
 
 Learned about local storage in JS.
 
